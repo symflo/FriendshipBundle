@@ -12,6 +12,7 @@ use Symfony\Component\DependencyInjection\Loader;
  *
  * @uses Extension
  * @author Cédric Dugat <ph3@slynett.com>
+ * @author Florent Mondoloni
  */
 class CooFriendshipExtension extends Extension
 {
@@ -23,13 +24,13 @@ class CooFriendshipExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $loader->load('config.xml');
+        $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config/services/'));
+        $loader->load('configuration.xml');
 
         $configuration = $configs[0];
 
         /* --- Configuration management and overloads --- */
 
-        $container->setParameter('coo_friendship.config', $configuration);
+        $container->setParameter('coo_friendship.configuration', $configuration);
     }
 }
