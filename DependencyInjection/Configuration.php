@@ -9,7 +9,6 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 /**
  * Configuration
  *
- * @uses ConfigurationInterface
  * @author Cédric Dugat <ph3@slynett.com>
  * @author Florent Mondoloni
  */

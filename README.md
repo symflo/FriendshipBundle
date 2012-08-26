@@ -24,7 +24,7 @@ This bundle is under the MIT license. See the complete license in the bundle:
 ## Installation 
 
 
-## Step 1: Add TrsteelCkeditorBundle to your composer.json
+### Step 1: Add FriendshipBundle to your composer.json
 
 ```json
 {
@@ -34,7 +34,7 @@ This bundle is under the MIT license. See the complete license in the bundle:
 }
 ```
 
-## Step 2: Enable the bundle
+### Step 2: Enable the bundle
 
 ```php
 <?php
@@ -50,19 +50,57 @@ public function registerBundles()
 ?>
 ```
 
-## Step 3: Configure the bundle
+### Step 3: Configure the bundle
 
 An example configuration:
 ```yml
 coo_friendship:
 	settings:
-		base: 'redis' 
+		storage: 'redis' 
 		fallback: 'doctrine'
   	relation_ship:
 		friends: 
-			entityFrom: ENtity/User
-			entityTo: ENtity/User
+			entityFrom: Entity/User
+			entityTo: Entity/User
 		partner: 
-			entityFrom: ENtity/User
-			entityTo: ENtity/Company
+			entityFrom: Entity/User
+			entityTo: Entity/Company
+```
+
+### Step4: Usage
+
+```php
+<?php
+$rsm = $this->get('relation_ship_manager');
+$rsm->setRelation('friends');
+$user = $fm->getDecorator()->setEntity($user);
+
+$user->hasRelationWith();
+$friends = $user->getFriends();
+?>
+```
+
+To transform your collection object with decorator you just have to:
+
+```php
+<?php
+$rsm = $this->get('relation_ship_manager');
+$rsm->setRelation('partner');
+$usersDecorated = $rsm->decorateCollection($users);
+
+foreach ($usersDecorated as $user) {
+	$user->hasRelationWith($company);
+}
+?>
+```
+
+You can manage workflow ship like this:
+
+```php
+<?php
+$rsm = $this->get('relation_ship_manager');
+$rsm->setRelation('friends');
+$fm->getDecorator()->setEntity($user);
+$rsm->getWorkflow()->acceptRelationFrom($user);
+?>
 ```

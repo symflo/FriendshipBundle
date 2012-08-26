@@ -26,6 +26,7 @@ class CooFriendshipExtension extends Extension
 
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config/services/'));
         $loader->load('configuration.xml');
+        $loader->load('relation.xml');
 
         $configuration = $configs[0];
 
